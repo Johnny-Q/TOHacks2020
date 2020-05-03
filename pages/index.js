@@ -2,6 +2,10 @@ let backgroundColors = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#12
 const electron = require('electron')
 const {ipcRenderer} = electron  
 
+function grabText(){
+    var str = document.getElementById("text").value;
+    
+}
 ipcRenderer.send("request:winPollData")
 ipcRenderer.on("data:winPollData",function(e, data){
   console.log(data);
@@ -29,4 +33,5 @@ ipcRenderer.on("data:winPollData",function(e, data){
     }
 });
 })
+
 
