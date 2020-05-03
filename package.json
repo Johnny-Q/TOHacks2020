@@ -1,0 +1,23 @@
+{
+  "name": "tohacks2020",
+  "version": "1.0.0",
+  "description": "TOHacks2020",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Johnny-Q/TOHacks2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Johnny-Q/TOHacks2020/issues"
+  },
+  "homepage": "https://github.com/Johnny-Q/TOHacks2020#readme",
+  "dependencies": {
+    "electron": "^8.2.5"
+  }
+}
