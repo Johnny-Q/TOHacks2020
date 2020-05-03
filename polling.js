@@ -1,29 +1,58 @@
 const rl = require("./rollingList.js")
 
 class ActiveWindowPoll{
-    constructor(activeWin, timeDelta, maxRecordedPolls){
+    constructor(activeWin, timeDelta, trackingList, maxGameTime){
         this.activeWin = activeWin;
         this.timeDelta = timeDelta;
-        this.maxRecordedPolls = maxRecordedPolls;
+        this.trackingList = trackingList;
+        console.log(this.trackingList); console.log(trackingList);
         this.log = new rl.RollingList(86400/timeDelta);
+        this.hasScreamed = false;
+        this.maxGameTime = maxGameTime;
     }
 
     start(){
         var _this = this;
+        // set up polling
         setInterval(async function(){
             let activeWindow = await _this.activeWin();
-            // console.log(activeWindow);
+            // if activeWindow is undefined for some reason just push the last app
             if (activeWindow == undefined){
                 _this.log.push(_this.log.storage[_this.log.top])
             }
             else{
                 activeWindow = activeWindow.title;
-                while(activeWindow.indexOf('-') != -1){
-                    activeWindow = activeWindow.substring(activeWindow.indexOf('-') +1)
+                // super jank youtube detection
+                if(activeWindow.indexOf("YouTube") != -1){
+                    activeWindow = "YouTube";
                 }
+                // somewhat less jank name unlongifier
+                else while(activeWindow.indexOf('-') != -1){
+                    activeWindow = activeWindow.substring(activeWindow.indexOf('-') + 2)
+                }
+                // hardcode out some bugs :P
+                if(activeWindow == "League of Legends (TM) Client") activeWindow = "League of Legends";
+                else if(activeWindow == "") activeWindow = "Desktop";
+                console.log(activeWindow);
+
                 _this.log.push(activeWindow);
             }
+            // schedule to occur every timeDelta seconds
         }, 1000*this.timeDelta);
+
+        // set up game detection
+        setInterval(async function(){
+            let stats = _this.getStats();
+            console.log(stats);
+            let gameTime = 0; let game;
+            for(game of _this.trackingList){
+                gameTime += (stats[game] != undefined ? stats[game] : 0);
+            }
+            if (gameTime > 10){
+                _this.scream();
+            }
+            console.log(gameTime);
+        }, 3000);
     }
 
     print(){
@@ -36,7 +65,7 @@ class ActiveWindowPoll{
         console.log("done");
     }
 
-    getStats(time){
+    getStats(time=24*3600){
         const it = this.log.iterator();
         let count = 0, timeCount = time/this.timeDelta;
         let result = it.next();
@@ -50,11 +79,21 @@ class ActiveWindowPoll{
         stats["totalTime"] = count*this.timeDelta;
         return stats;
     }
+
+    addGame(gameName){
+        this.trackingList.append(gameName);
+    }
     
     sleep(ms){
         return new Promise(function(resolve){
             setTimeout(resolve, ms);
         });
+    }
+
+    scream(){
+        if (!this.hasScreamed){
+        }
+        this.hasScreamed = true;
     }
 };
 
