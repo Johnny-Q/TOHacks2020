@@ -16,7 +16,7 @@ class ActiveWindowPoll{
             if (activeWindow == undefined){
                 _this.log.push(_this.log.storage[_this.log.top])
             }
-            _this.log.push(activeWindow.owner.name);
+            else{_this.log.push(activeWindow.owner.name);}
         }, 1000*this.timeDelta);
     }
 
