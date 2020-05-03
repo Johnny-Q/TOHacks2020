@@ -1,5 +1,6 @@
 const electron = require("electron");
 const activeWin = require("active-win");
+const api = require("./apis.js");
 
 const {app} = electron;
 
