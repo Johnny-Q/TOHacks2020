@@ -17,10 +17,14 @@ var t = twit({
 let winpoll;
 
 app.on("ready", async function(){
-    var window = new BrowserWindow();
-    window.loadURL("http://localhost:3000")
-    console.log("reee");
-    api.tRandomPost(t, "reeeee.png");
+    var window = new BrowserWindow({
+        webPreferences:{
+            nodeIntegration: true
+        }
+    });
+    window.loadURL("file:///C:/Users/Johnny/Desktop/Everything/github/TOHacks2020/pages/index.html");
+    //console.log("reee");
+    //api.tRandomPost(t, "reeeee.png");
     // winpoll = new AWPoll.ActiveWindowPoll(activeWin, 1, 100);
     // winpoll.start();
     // await sleep(10000);
