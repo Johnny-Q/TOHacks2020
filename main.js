@@ -22,7 +22,7 @@ app.on("ready", async function(){
             nodeIntegration: true
         }
     });
-    window.loadURL(`file:///${__dirname}/pages/Chart.html`);
+    window.loadURL(`file:///${__dirname}/pages/index.html`);
     //console.log("reee");
     //api.tRandomPost(t, "reeeee.png");
     winpoll = new AWPoll.ActiveWindowPoll(activeWin, 1, 69);
