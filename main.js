@@ -5,7 +5,7 @@ const api = require("./apis.js");
 const twit = require("twit");
 const config = require("./config.json");
 
-const {app, BrowserWindow} = electron;
+const {app, BrowserWindow, ipcMain} = electron;
 
 var t = twit({
   consumer_key: config.API_key,
@@ -26,6 +26,10 @@ app.on("ready", async function(){
     // await sleep(10000);
     // winpoll.print();
     // console.log(winpoll.getStats(10));
+});
+
+ipcMain.on("yeet", function(data){
+    console.log(data);
 });
 
 function sleep(ms){
