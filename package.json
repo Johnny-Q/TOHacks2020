@@ -20,6 +20,7 @@
   "dependencies": {
     "active-win": "^6.1.0",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "electron": "^8.2.5",
     "electron-rebuild": "^1.10.1",
     "node-gyp": "^6.1.0",
