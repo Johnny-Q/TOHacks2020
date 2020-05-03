@@ -1,11 +1,11 @@
 {
   "name": "tohacks2020",
   "version": "1.0.0",
-  "description": "TOHacks2020",
+  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"electron ."
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Johnny-Q/TOHacks2020#readme",
   "dependencies": {
-    "electron": "^8.2.5"
+    "active-win": "^6.1.0",
+    "electron": "^8.2.5",
+    "electron-rebuild": "^1.10.1",
+    "node-gyp": "^6.1.0"
   }
 }
