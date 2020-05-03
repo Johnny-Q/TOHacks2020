@@ -4,7 +4,6 @@ ul.NavBar {
     margin: 0;
     padding: 0;
     width: 200px;
-    margin-top:5vw;
     margin-bottom:5vw;
  
   }
@@ -29,4 +28,8 @@ ul.NavBar {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
 
+  }
+  h1.Header{
+    text-align: center;
+    padding-right: 14vw;
   }
