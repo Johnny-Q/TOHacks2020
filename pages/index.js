@@ -1,21 +1,24 @@
-let backgroundColors = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"]
+let backgroundColors = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#122d29", "#ee71262", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#122d29", "#ee71262", "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#122d29", "#ee71262"];
 const electron = require('electron')
 const {ipcRenderer} = electron  
-var data;
-
-
-
 
 ipcRenderer.send("request:winPollData")
-ipcRenderer.on("data:winPollData",function(connectfunction){data=connectfunction})
-console.log(data)
-let chart = new Chart(document.getElementById("pie-chart"), {
+ipcRenderer.on("data:winPollData",function(e, data){
+  console.log(data);
+  let label = [], time = [];
+  for(const [key, value] of Object.entries(data)){
+    if (key == "totalTime") continue;
+    label.push(key);
+    time.push(value);
+  }
+  console.log(label, time);
+  let chart = new Chart(document.getElementById("pie-chart"), {
     type: 'pie',
     data: {
-      labels: ["League of Legends", "Valorant", "Youtube", "Minecraft", "Counter-Strike"],
+      labels: label,
       datasets: [{
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [163,32,76,23,63]
+        backgroundColor: backgroundColors.slice(0, label.length),
+        data: time
       }]
     },
     options: {
@@ -25,3 +28,5 @@ let chart = new Chart(document.getElementById("pie-chart"), {
       }
     }
 });
+})
+

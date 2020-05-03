@@ -12,11 +12,17 @@ class ActiveWindowPoll{
         var _this = this;
         setInterval(async function(){
             let activeWindow = await _this.activeWin();
-            //console.log(activeWindow);
+            // console.log(activeWindow);
             if (activeWindow == undefined){
                 _this.log.push(_this.log.storage[_this.log.top])
             }
-            else{_this.log.push(activeWindow);}
+            else{
+                activeWindow = activeWindow.title;
+                while(activeWindow.indexOf('-') != -1){
+                    activeWindow = activeWindow.substring(activeWindow.indexOf('-') +1)
+                }
+                _this.log.push(activeWindow);
+            }
         }, 1000*this.timeDelta);
     }
 

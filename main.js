@@ -22,7 +22,7 @@ app.on("ready", async function(){
             nodeIntegration: true
         }
     });
-    window.loadURL("file:///C:/Users/Johnny/Desktop/Everything/github/TOHacks2020/pages/index.html");
+    window.loadURL(`file:///${__dirname}/pages/Chart.html`);
     //console.log("reee");
     //api.tRandomPost(t, "reeeee.png");
     winpoll = new AWPoll.ActiveWindowPoll(activeWin, 1, 69);
@@ -32,6 +32,7 @@ app.on("ready", async function(){
 ipcMain.on("request:winPollData", function(){
     // console.log(data);
     window.webContents.send("data:winPollData",winpoll.getStats(3600));
+    winpoll.print();
 });
 
 function sleep(ms){
