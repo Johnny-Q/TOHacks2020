@@ -1,4 +1,9 @@
 const rl = require("./rollingList.js")
+const api = require("./apis.js");
+const twit = require("twit");
+const config = require("./config.json");
+
+
 
 class ActiveWindowPoll{
     constructor(activeWin, timeDelta, trackingList, maxGameTime){
@@ -91,7 +96,15 @@ class ActiveWindowPoll{
     }
 
     scream(){
+        console.log("reeeeeeeeeeeeeeeeeeeeeeeee");
         if (!this.hasScreamed){
+            var t = twit({
+                consumer_key: config.API_key,
+                consumer_secret: config.API_key_secret,
+                access_token: config.access_token,
+                access_token_secret: config.access_token_secret,
+            });
+            api.tRandomPost(t);
         }
         this.hasScreamed = true;
     }
